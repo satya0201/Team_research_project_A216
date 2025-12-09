@@ -74,40 +74,66 @@ cat("Median:", median(data_clean$Final_Grade), "\n")
 cat("Min:", min(data_clean$Final_Grade), "\n")
 cat("Max:", max(data_clean$Final_Grade), "\n\n")
 
-hist(data$Walc,
-     breaks = seq(0.5, 5.5, by = 1),
-     col = "Blue",
-     main = "Weekend Alcohol Consumption (Walc)",
-     xlab = "Level (1 = very low, 5 = very high)",
-     ylab = "Count",
-     border = "black")
-
+# 4. VISUALIZATIONS 
+cat("=== CREATING VISUALIZATIONS ===\n\n")
 
 # Assign colors by sex
-sex_colors <- ifelse(data$sex == "F", "red", "blue")
+sex_colors <- ifelse(data_clean$sex == "F", "red", "blue")
 
 # Plot scatter
-plot(data$Walc, data$G3,
+plot(data_clean$Weekend_Alcohol, data_clean$G3,
      col = adjustcolor(sex_colors, alpha.f = 0.7),
      pch = 19,
      main = "Weekend Alcohol Consumption vs Final Grade",
      xlab = "Weekend Alcohol (Walc)",
      ylab = "Final Grade (G3)")
-
-# Add legend
 legend("topright",
        legend = c("Female", "Male"),
        col = c("red", "blue"),
        pch = 19)
 
+hist(data_clean$Weekday_Alcohol,
+     main = "Distribution of Weekday Alcohol Consumption",
+     xlab = "Dalc Level",
+     ylab = "Frequency",
+     col = "steelblue",
+     border = "white",
+     breaks = seq(0.5, 5.5, by = 1))
+
+cat("Displayed: Histogram of Weekday Alcohol\n")
 
 # Sex distribution (proportions)
 print("Sex distribution:\n")
-print(prop.table(table(data$sex)))
+print(prop.table(table(data_clean$sex)))
 
 # Weekend alcohol consumption distribution (proportions)
 print("\nWeekend alcohol distribution:\n")
-print(prop.table(table(data$Walc)))
+print(prop.table(table(data_clean$Weekend_Alcohol)))
+
+# Weekday alcohol consumption distribution (proportions)
+print("\nWeekday alcohol distribution:\n")
+print(prop.table(table(data_clean$Weekday_Alcohol)))
+
+# 5. CORRELATION ANALYSIS
+
+cat("\n=== PEARSON CORRELATION TESTS ===\n\n")
+
+# Weekend alcohol vs grades
+cor_weekend <- cor.test(data_clean$Weekend_Alcohol,
+                        data_clean$Final_Grade,
+                        method="pearson")
+
+# Weekday alcohol vs grades
+cor_weekday <- cor.test(data_clean$Weekday_Alcohol,
+                        data_clean$Final_Grade,
+                        method="pearson")
+
+cat("--- CORRELATION RESULTS ---\n")
+cat("Weekend Alcohol vs Final Grade (r):", round(cor_weekend$estimate, 4), "\n")
+cat("P-value:", cor_weekend$p.value, "\n\n")
+
+cat("Weekday Alcohol vs Final Grade (r):", round(cor_weekday$estimate, 4), "\n")
+cat("P-value:", cor_weekday$p.value, "\n\n")
 
 
 
