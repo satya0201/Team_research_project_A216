@@ -1,13 +1,29 @@
-# checking the data and measures of central tendency of the data.
-View(data)
+# Load required libraries
+library(ggplot2)
+library(dplyr)
+
+
+# 1. DATA LOADING AND PREPARATION
+
+cat("=== LOADING DATASET ===\n\n")
+
+# Read dataset
+data <- read.csv("student-mat.csv")
+
+# Display dataset structure
+cat("--- STUDENT ALCOHOL DATASET ---\n")
+cat("Columns:", paste(colnames(data), collapse=", "), "\n")
+cat("Dimensions:", nrow(data), "rows x", ncol(data), "columns\n\n")
+
+str(data)
 summary(data)
+
 # checking the unique values of each columns.
-unique(data$school)
-unique(data$address)
-unique(data$famsize)
-unique(data$Dalc)
-unique(data$Walc)
-unique(data$G3)
+for (col in colnames(data)){cat(col,":",length(unique(data[[col]])), "unique values", sep = "")}
+
+# Check for missing values
+cat("\n--- MISSING VALUES CHECK ---\n")
+cat("Missing values in dataset:", sum(is.na(data)), "\n\n")
 
 hist(data$Walc,
      breaks = seq(0.5, 5.5, by = 1),
@@ -43,4 +59,5 @@ print(prop.table(table(data$sex)))
 # Weekend alcohol consumption distribution (proportions)
 print("\nWeekend alcohol distribution:\n")
 print(prop.table(table(data$Walc)))
+
 
