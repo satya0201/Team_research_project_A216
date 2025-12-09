@@ -135,5 +135,20 @@ cat("P-value:", cor_weekend$p.value, "\n\n")
 cat("Weekday Alcohol vs Final Grade (r):", round(cor_weekday$estimate, 4), "\n")
 cat("P-value:", cor_weekday$p.value, "\n\n")
 
+# 6. INTERPRETATION
 
+cat("\n=== CORRELATION INTERPRETATION ===\n\n")
 
+# Weekend alcohol interpretation
+if (cor_weekend$p.value < 0.05) {
+  cat("Weekend Alcohol: Significant effect detected (reject H0)\n")
+} else {
+  cat("Weekend Alcohol: No significant effect (fail to reject H0)\n")
+}
+
+# Weekday alcohol interpretation
+if (cor_weekday$p.value < 0.05) {
+  cat("Weekday Alcohol: Significant effect detected (reject H0)\n")
+} else {
+  cat("Weekday Alcohol: No significant effect (fail to reject H0)\n")
+}
