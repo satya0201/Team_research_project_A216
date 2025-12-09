@@ -25,6 +25,55 @@ for (col in colnames(data)){cat(col,":",length(unique(data[[col]])), "unique val
 cat("\n--- MISSING VALUES CHECK ---\n")
 cat("Missing values in dataset:", sum(is.na(data)), "\n\n")
 
+# 2. DATA CLEANING AND SELECTION
+
+cat("=== DATA CLEANING ===\n\n")
+
+# Remove missing values (if any)
+data_clean <- na.omit(data)
+cat("Rows after removing NA:", nrow(data_clean), "\n\n")
+
+# Select variables relevant to research question
+data_clean <- data_clean[, c("sex", "age", "studytime", "failures", "goout","Dalc", "Walc", "G1", "G2", "G3")]
+
+# Renaming columns
+colnames(data_clean)[colnames(data_clean) == "Dalc"] <- "Weekday_Alcohol"
+colnames(data_clean)[colnames(data_clean) == "Walc"] <- "Weekend_Alcohol"
+colnames(data_clean)[colnames(data_clean) == "G3"]   <- "Final_Grade"
+
+cat("--- FINAL CLEANED DATASET ---\n")
+str(data_clean)
+head(data_clean, 20)
+
+
+# 3. DESCRIPTIVE STATISTICS
+
+cat("\n\n=== DESCRIPTIVE STATISTICS ===\n\n")
+
+# Weekday Alcohol (Dalc)
+cat("--- WEEKDAY ALCOHOL (Dalc) ---\n")
+cat("Mean:", round(mean(data_clean$Weekday_Alcohol), 2), "\n")
+cat("SD:", round(sd(data_clean$Weekday_Alcohol), 2), "\n")
+cat("Median:", median(data_clean$Weekday_Alcohol), "\n")
+cat("Min:", min(data_clean$Weekday_Alcohol), "\n")
+cat("Max:", max(data_clean$Weekday_Alcohol), "\n\n")
+
+# Weekend Alcohol (Walc)
+cat("--- WEEKEND ALCOHOL (Walc) ---\n")
+cat("Mean:", round(mean(data_clean$Weekend_Alcohol), 2), "\n")
+cat("SD:", round(sd(data_clean$Weekend_Alcohol), 2), "\n")
+cat("Median:", median(data_clean$Weekend_Alcohol), "\n")
+cat("Min:", min(data_clean$Weekend_Alcohol), "\n")
+cat("Max:", max(data_clean$Weekend_Alcohol), "\n\n")
+
+# Final Grade (G3)
+cat("--- FINAL GRADE (G3) ---\n")
+cat("Mean:", round(mean(data_clean$Final_Grade), 2), "\n")
+cat("SD:", round(sd(data_clean$Final_Grade), 2), "\n")
+cat("Median:", median(data_clean$Final_Grade), "\n")
+cat("Min:", min(data_clean$Final_Grade), "\n")
+cat("Max:", max(data_clean$Final_Grade), "\n\n")
+
 hist(data$Walc,
      breaks = seq(0.5, 5.5, by = 1),
      col = "Blue",
@@ -59,5 +108,6 @@ print(prop.table(table(data$sex)))
 # Weekend alcohol consumption distribution (proportions)
 print("\nWeekend alcohol distribution:\n")
 print(prop.table(table(data$Walc)))
+
 
 
