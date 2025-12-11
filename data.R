@@ -284,11 +284,11 @@ interpret_spearman <- function(s_obj, label){
   pval <- s_obj$p.value
   if (pval < 0.05) {
     cat(label, ": Spearman rho =", round(rho,4),
-        "— statistically significant (p =", signif(pval,4),
+        " statistically significant (p =", signif(pval,4),
         "). Interpretation: evidence of a relationship between student grades and alcohol consumption.\n")
   } else {
     cat(label, ": Spearman rho =", round(rho,4),
-        "— not statistically significant (p =", signif(pval,4),
+        " not statistically significant (p =", signif(pval,4),
         "). Interpretation: no evidence of a relationship between student grades and alcohol consumption.\n")
   }
 }
@@ -303,4 +303,5 @@ summary_df <- data.frame(
   value = c(as.numeric(spearman_wknd$estimate), spearman_wknd$p.value, as.numeric(pearson_wknd$estimate), pearson_wknd$p.value,
             as.numeric(spearman_wkdy$estimate), spearman_wkdy$p.value, as.numeric(pearson_wkdy$estimate), pearson_wkdy$p.value)
 )
+
 print(summary_df)
