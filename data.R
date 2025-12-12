@@ -122,9 +122,9 @@ par(mfrow = c(1, 1))
 
 
 # distribution of final grade(g3) histogram plot.
-hist(data$G3,breaks = 10,col = "blue",main = "Distribution of Final Grades(G3)", xlab = "Final Grade", ylab = "Count",freq = TRUE, border = "Black")
-dens<-density(data$G3)
-scaled_y <- dens$y * diff(hist(data$G3, plot = FALSE)$breaks[1:2]) * length(data$G3)
+hist(data_clean$G3,breaks = 10,col = "blue",main = "Distribution of Final Grades(G3)", xlab = "Final Grade", ylab = "Count",freq = TRUE, border = "Black")
+dens<-density(data_clean$G3)
+scaled_y <- dens$y * diff(hist(data_clean$G3, plot = FALSE)$breaks[1:2]) * length(data_clean$G3)
 lines(dens$x, scaled_y, lwd = 2)
 
 
@@ -303,4 +303,5 @@ summary_df <- data.frame(
 )
 
 print(summary_df)
+
 
