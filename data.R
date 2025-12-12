@@ -8,7 +8,7 @@ library(dplyr)
 cat("=== LOADING DATASET ===\n\n")
 
 # Read dataset
-data <- read.csv("student-mat.csv")
+data <- read.csv("student-mat.csv",stringsAsFactors = FALSE)
 
 # Display dataset structure
 cat("--- STUDENT ALCOHOL DATASET ---\n")
@@ -303,5 +303,6 @@ summary_df <- data.frame(
 )
 
 print(summary_df)
+
 
 
